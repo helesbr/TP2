@@ -41,17 +41,14 @@ new Phaser.Game(config);
  * On y trouve surtout le chargement des assets (images, son ..)
  */
 function preload() {
-  
-  
-  // chargement tuiles de jeu
-this.load.image("Phaser_tuilesdejeu", "src/assets/tuilesJeu.png");
-
-// chargement de la carte
-this.load.tilemapTiledJSON("carte", "src/assets/map.tmj"); 
-this.load.spritesheet("img_perso", "src/assets/dude.png", {
+ // chargement tuiles de jeu
+  this.load.image("Phaser_tuilesdejeu", "src/assets/tuilesJeu.png");
+  // chargement de la carte
+  this.load.tilemapTiledJSON("carte", "src/assets/map.tmj");
+  this.load.spritesheet("img_perso", "src/assets/dude.png", {
     frameWidth: 32,
     frameHeight: 48
-  }); 
+  });
 }
 
 /***********************************************************************/
@@ -65,7 +62,7 @@ this.load.spritesheet("img_perso", "src/assets/dude.png", {
  * ainsi que toutes les instructions permettant de planifier des evenements
  */
 
-  function create() {
+function create() {
 
   const carteDuNiveau = this.add.tilemap("carte");
 
@@ -90,10 +87,10 @@ this.load.spritesheet("img_perso", "src/assets/dude.png", {
     "Calque plateforme",
     tileset
   );
-  calque_plateforme.setCollisionByProperty({ estSolide: true });
 
-player = this.physics.add.sprite(100, 450, "img_perso");
+  calque_plateforme.setCollisionByProperty({ estSolide: true });
   player.setCollideWorldBounds(true);
+  player = this.physics.add.sprite(100, 450, "img_perso");
   player.setBounce(0.2);
 
   // COLLISION avec les plateformes de la tilemap
@@ -101,6 +98,7 @@ player = this.physics.add.sprite(100, 450, "img_perso");
 
   // CLAVIER
   clavier = this.input.keyboard.createCursorKeys();
+  
   // animations
   this.anims.create({
     key: "anim_tourne_gauche",
@@ -119,7 +117,7 @@ player = this.physics.add.sprite(100, 450, "img_perso");
     frames: [{ key: "img_perso", frame: 4 }],
     frameRate: 20
   });
-   this.physics.world.setBounds(0, 0, carteDuNiveau.widthInPixels, carteDuNiveau.heightInPixels);
+  this.physics.world.setBounds(0, 0, carteDuNiveau.widthInPixels, carteDuNiveau.heightInPixels);
   this.cameras.main.setBounds(0, 0, carteDuNiveau.widthInPixels, carteDuNiveau.heightInPixels);
   this.cameras.main.startFollow(player);
 }
@@ -160,11 +158,7 @@ function update() {
 var groupe_plateformes;
 var player; // désigne le sprite du joueur
 var clavier;
-
 var score = 0;
-
 var gameOver = false;
-  
-
 var nbSauts = 0;
 var SAUT_MAX = 2; 
